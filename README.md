@@ -1,2 +1,3 @@
-# UIUX-DynamicWeb
-This is an example of a dynamic interactive website built using React.js、Tailwind CSS、GSAP
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
