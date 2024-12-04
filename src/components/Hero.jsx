@@ -1,6 +1,14 @@
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
+
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/all'
+
 import { TiLocationArrow } from 'react-icons/ti'
 import { Button } from '@/components/ui/button'
+
+// 必须启用插件：才能使用监听滚动条的变化
+gsap.registerPlugin(ScrollTrigger)
 
 export const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(1)
@@ -15,6 +23,12 @@ export const Hero = () => {
     const handleVideoLoad = () => {
         setLoadedVideos(prev => prev + 1)
     }
+
+    useEffect(() => {
+        if (loadedVideos === totalVideos - 1) {
+            setLoading(false)
+        }
+    }, [loadedVideos])
 
     // 鼠标点击切换下一个视频
     const handleMiniVdClick = () => {
@@ -31,11 +45,70 @@ export const Hero = () => {
         setCurrentIndex(prevIndex => (prevIndex % totalVideos) + 1)
     }
 
+    // 动画: 点击视频切换时：由内向外（四周）过渡切换内容
+    useGSAP(
+        () => {
+            if (hasClicked) {
+                gsap.set('#next-video', { visibility: 'visible' })
+                gsap.to('#next-video', {
+                    transformOrigin: 'center center',
+                    scale: 1,
+                    width: '100%',
+                    height: '100%',
+                    duration: 1,
+                    ease: 'power1.inOut',
+                    onStart: () => nextVdRef.current.play(),
+                })
+                gsap.from('#current-video', {
+                    transformOrigin: 'center center',
+                    scale: 0,
+                    duration: 1.5,
+                    ease: 'power1.inOut',
+                })
+            }
+        },
+        {
+            dependencies: [currentIndex],
+            revertOnUpdate: true,
+        }
+    )
+
+    // 动画：使用鼠标滚轮时
+    // 路径库：https://bennettfeely.com/clippy/
+    // 角度库：https://9elements.github.io/fancy-border-radius/#100.51.100.61--.
+    useGSAP(() => {
+        gsap.set('#video-frame', {
+            clipPath: 'polygon(14% 0, 72% 0, 88% 90%, 0 95%)',
+            borderRadius: '0% 0% 40% 10%',
+        })
+        gsap.from('#video-frame', {
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+            borderRadius: '0% 0% 0% 0%',
+            ease: 'power1.inOut',
+            scrollTrigger: {
+                trigger: '#video-frame',
+                start: 'center center',
+                end: 'bottom center',
+                scrub: true,
+            },
+        })
+    })
+
     const getVideoSrc = index => `videos/hero-${index}.mp4`
 
     return (
         <div className='relative h-dvh w-screen overflow-x-hidden'>
-            <div id='video' className='relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75'>
+            {loading && (
+                <div className='flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50'>
+                    {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
+                    <div className='three-body'>
+                        <div className='three-body__dot'></div>
+                        <div className='three-body__dot'></div>
+                        <div className='three-body__dot'></div>
+                    </div>
+                </div>
+            )}
+            <div id='video-frame' className='relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75'>
                 <section>
                     <div className='mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg'>
                         <div
