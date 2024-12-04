@@ -8,7 +8,7 @@ const App = () => {
             <h2 className=' font-robert-medium'> font-robert-medium</h2>
             <h2 className=' font-robert-regular'> font-robert-regular</h2>
             <h2 className=' font-zentry'> font-zentry</h2>
-            <h2 className=' font-general'> font-general</h2>
+            <h2 className=' font-general text-violet-300'> font-general</h2>
         </>
     )
 }
