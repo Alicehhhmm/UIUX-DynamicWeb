@@ -3,7 +3,7 @@ import { Hero } from '@/components/Hero'
 
 const App = () => {
     return (
-        <main>
+        <main className='relative min-h-screen w-screen overflow-x-hidden'>
             <Hero />
         </main>
     )
