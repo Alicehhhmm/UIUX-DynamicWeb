@@ -173,6 +173,10 @@ export const Hero = () => {
                     </div>
                 </section>
             </div>
+            {/* 底部：文字重叠效果 */};
+            <h1 className='special-font hero-heading absolute bottom-5 right-5 text-black'>
+                G<b>A</b>MING
+            </h1>
         </div>
     )
 }
