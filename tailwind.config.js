@@ -11,6 +11,10 @@ export default {
                 'robert-regular': ['robert-regular', 'sanf-serif'],
             },
             colors: {
+                yellow: {
+                    100: '#8e983f',
+                    300: '#edff66',
+                },
                 blue: {
                     50: '#DFDFF0',
                     75: '#dfdff2',
@@ -20,10 +24,6 @@ export default {
                 },
                 violet: {
                     300: '#5724ff',
-                },
-                yellow: {
-                    100: '#8e983f',
-                    300: '#edff66',
                 },
             },
         },
