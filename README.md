@@ -14,6 +14,6 @@ Shape shear：[clippy](https://bennettfeely.com/clippy/)
 
 Border rounded cut：[border-radius](https://9elements.github.io/fancy-border-radius/#100.51.100.61--.)
 
-JS Animation Reference:[gsap v3](https://gsap.com/docs/v3/)
+JS Animation Reference: [gsap v3](https://gsap.com/docs/v3/)
 
-css Animation Reference : [animate.css](https://animate.style/)
+Css Animation Reference : [animate.css](https://animate.style/)
