@@ -4,6 +4,7 @@ import { About } from '@/components/About'
 import { Navbar } from '@/components/Navbar'
 import { Features } from '@/components/features/Features'
 import { Story } from '@/components/Story'
+import Footer from '@/components/Footer'
 
 const App = () => {
     return (
@@ -13,7 +14,8 @@ const App = () => {
             <About />
             <Features />
             <Story />
-            <div className='bg-green-500 min-h-screen'></div>
+            <div className='bg-green-500 h-dvh'>DOTO</div>
+            <Footer />
         </main>
     )
 }
